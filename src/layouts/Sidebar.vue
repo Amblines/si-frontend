@@ -16,6 +16,17 @@
 import { renderIcon } from "@/helpers/renderIcon";
 import { NMenu } from "naive-ui";
 import { WorldWwwIcon } from "vue-tabler-icons";
+import { useQuery } from "@tanstack/vue-query";
+import http from "@/helpers/http";
+
+const { data } = useQuery({
+  queryKey: ["counters"],
+  queryFn: async () => {
+    http.get("counters");
+  },
+});
+
+console.log(data);
 
 const menuOptions = [
   {

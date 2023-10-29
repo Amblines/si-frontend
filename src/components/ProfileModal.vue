@@ -24,13 +24,14 @@
           v-model:value="newAccountHash"
           placeholder="Введите код аккаунта"
         ></n-input>
-        <n-button type="info" @click="logoutAll">Добавить аккаунт</n-button>
+        <n-button type="info" @click="addAccount">Добавить аккаунт</n-button>
       </n-space>
     </n-radio-group>
   </n-modal>
 </template>
 
 <script setup>
+import http from "@/helpers/http";
 import { useAccount } from "@/hooks/account";
 import { NButton, NModal, NRadioGroup, NSpace, NRadio, NInput } from "naive-ui";
 import { ref } from "vue";
