@@ -64,7 +64,7 @@ const { mutate: checkExistUser } = useMutation({
       content: "Вы успешно авторизовались!",
       duration: 5000,
     });
-    router.push("/");
+    router.go("/");
   },
 });
 
