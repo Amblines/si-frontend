@@ -9,6 +9,7 @@
     </n-space>
     <div class="actions">
       <add-new-website></add-new-website>
+      <n-button @click="copy">Скопировать код</n-button>
       <n-input class="account" disabled :value="code" />
       <profile-modal />
     </div>
@@ -16,12 +17,20 @@
 </template>
 
 <script setup>
-import { NInput, NSpace } from "naive-ui";
+import { NButton, NInput, NSpace } from "naive-ui";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { useAccount } from "@/hooks/account";
 import AddNewWebsite from "@/components/AddNewWebsite.vue";
 
 const { code } = useAccount();
+
+const copy = async () => {
+  try {
+    await navigator.clipboard.writeText(code.value);
+  } catch (e) {
+    console.log(e);
+  }
+};
 </script>
 
 <style scoped>
