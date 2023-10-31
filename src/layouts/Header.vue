@@ -1,16 +1,27 @@
 <template>
   <div class="header">
-    <div class="logo">Статистика сайтов</div>
+    <n-space>
+      <div class="logo">
+        <router-link to="/" style="text-decoration: none">
+          Статистика сайтов
+        </router-link>
+      </div>
+    </n-space>
     <div class="actions">
-      <n-input class="account" disabled value="1234kasdfasnvzxc" />
+      <add-new-website></add-new-website>
+      <n-input class="account" disabled :value="code" />
       <profile-modal />
     </div>
   </div>
 </template>
 
 <script setup>
-import { NInput } from "naive-ui";
+import { NInput, NSpace } from "naive-ui";
 import ProfileModal from "@/components/ProfileModal.vue";
+import { useAccount } from "@/hooks/account";
+import AddNewWebsite from "@/components/AddNewWebsite.vue";
+
+const { code } = useAccount();
 </script>
 
 <style scoped>

@@ -1,14 +1,6 @@
 <template>
   <div>
-    <n-menu
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :options="menuOptions"
-      key-field="whateverKey"
-      label-field="whateverLabel"
-      children-field="whateverChildren"
-    />
+    <n-menu :options="counters" />
   </div>
 </template>
 
@@ -18,168 +10,29 @@ import { NMenu } from "naive-ui";
 import { WorldWwwIcon } from "vue-tabler-icons";
 import { useQuery } from "@tanstack/vue-query";
 import http from "@/helpers/http";
+import { h } from "vue";
+import { RouterLink } from "vue-router";
 
-const { data } = useQuery({
-  queryKey: ["counters"],
+const { data: counters } = useQuery({
+  queryKey: ["counters-menu"],
   queryFn: async () => {
-    http.get("counters");
+    const response = await http.get("/counters");
+    return response.data.map((counter) => ({
+      label: () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              path: `/website/${counter.id}`,
+            },
+          },
+          { default: () => counter.domain },
+        ),
+      key: counter.key,
+      icon: renderIcon(WorldWwwIcon),
+    }));
   },
 });
-
-console.log(data);
-
-const menuOptions = [
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-  {
-    whateverLabel: "orelstroy.ru",
-    whateverKey: "orelstroy.ru",
-    icon: renderIcon(WorldWwwIcon),
-  },
-];
 </script>
 
 <style lang="scss" scoped></style>

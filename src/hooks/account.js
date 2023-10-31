@@ -1,17 +1,15 @@
 import { useLocalStorage } from "@vueuse/core";
-import { computed } from "vue";
 
 export const useAccount = () => {
-  const accountList = useLocalStorage("accountList", []);
-  const activeAccount = useLocalStorage("accountActive", null);
-
-  const activeAccountIdOrNull = computed(() => {
-    return activeAccount.value ? activeAccount.value.id : null;
-  });
+  const code = useLocalStorage("code", null);
 
   return {
-    accountList,
-    activeAccount,
-    activeAccountIdOrNull,
+    code,
+    updateCode: (value) => {
+      code.value = value;
+    },
+    logout: () => {
+      code.value = null;
+    },
   };
 };
