@@ -32,7 +32,10 @@
         <statistic-card label="За последний год" :statistic="yearStatistic" />
       </n-grid-item>
       <n-grid-item>
-        <n-card title="Уникальных пользователей">В разработке</n-card>
+        <statistic-card
+          label="Уникальных пользователей"
+          :statistic="uniqueUsersPageViewed"
+        />
       </n-grid-item>
     </n-grid>
     <n-grid cols="3" style="padding-top: 20px" x-gap="20px" y-gap="20px">
@@ -149,6 +152,17 @@ const { data: lastPageViewed } = useQuery({
       {
         params: { limit: 16 },
       },
+    );
+    return response.data;
+  },
+  enabled,
+});
+
+const { data: uniqueUsersPageViewed } = useQuery({
+  queryKey: ["uniqueUsersPageViewed", counterId.value],
+  queryFn: async () => {
+    const response = await http.get(
+      `/page-view/unique/counter/${counterId.value}`,
     );
     return response.data;
   },

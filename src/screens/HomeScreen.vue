@@ -29,7 +29,10 @@
       />
     </n-grid-item>
     <n-grid-item>
-      <n-card title="Уникальных пользователей">В разработке</n-card>
+      <statistic-card
+        label="Уникальных пользователей"
+        :statistic="uniqueUsersPageViewed"
+      />
     </n-grid-item>
   </n-grid>
   <n-grid cols="3" style="padding-top: 20px" x-gap="20px" y-gap="20px">
@@ -100,6 +103,14 @@ const { data: yearStatistic } = useQuery({
   queryKey: ["mainStatisticCardYear"],
   queryFn: async () => {
     const response = await http.get(`/page-view/interval/year`);
+    return response.data;
+  },
+});
+
+const { data: uniqueUsersPageViewed } = useQuery({
+  queryKey: ["mainUniqueUsersPageViewed"],
+  queryFn: async () => {
+    const response = await http.get(`/page-view/unique`);
     return response.data;
   },
 });
